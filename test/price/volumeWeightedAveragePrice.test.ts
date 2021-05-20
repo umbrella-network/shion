@@ -2,6 +2,7 @@ import {expect} from 'chai';
 
 import type {BarPrice} from '../../src/price/types';
 import {volumeWeightedAveragePrice} from '../../src/price';
+import {volumeWeightedAveragePriceWithBars} from '../../src/price/volumeWeightedAveragePrice';
 
 describe('volumeWeightedAveragePrice()', () => {
   const dataToTest: [[BarPrice, number][], number][] = [
@@ -12,7 +13,7 @@ describe('volumeWeightedAveragePrice()', () => {
     const [values, expected] = arr;
 
     it(`expect volumeWeightedAveragePrice of ${JSON.stringify(values)} to be equal to ${expected}`, () => {
-      expect(volumeWeightedAveragePrice(values)).to.eq(expected);
+      expect(volumeWeightedAveragePriceWithBars(values)).to.eq(expected);
     });
   });
 
@@ -49,7 +50,43 @@ describe('volumeWeightedAveragePrice()', () => {
     [{close: 248.72, open: 248.91, high: 249.08, low: 248.42}, 58270]], 247.24];
 
   it(`expect volumeWeightedAveragePrice of ${bars.length} bars to be equal to ${expected}`, () => {
-    expect(volumeWeightedAveragePrice(bars).toFixed(2)).to.eq(expected.toString());
+    expect(volumeWeightedAveragePriceWithBars(bars).toFixed(2)).to.eq(expected.toString());
+  });
+
+  const [values2, expected2]: [[number, number][], number] = [[
+    [336.1, 21144800],
+    [339.32, 13473000],
+    [345.03, 15236800],
+    [344.32, 9242600],
+    [343.44, 14064100],
+    [346.5, 11494200],
+    [351.88, 17322100],
+    [355.2, 13608500],
+    [358.16, 17240800],
+    [354.54, 33162400],
+    [356.85, 13127500],
+    [359.18, 11086200],
+    [359.9, 10149000],
+    [363.13, 17184100],
+    [358.3, 18949000],
+    [350.56, 29144500],
+    [338.61, 31162200],
+    [342.62, 23994700],
+    [342.88, 17853500],
+    [348.16, 13572000],
+    [353.21, 14395400],
+    [349.31, 16290300],
+    [352.12, 21521000],
+    [359.56, 17885200],
+    [360, 16188000],
+    [355.36, 19504300],
+    [355.76, 12718000],
+    [352.47, 16192700],
+    [346.67, 18138800],
+    [351.99, 16824200]], 350.59];
+
+  it(`expect volumeWeightedAveragePrice of ${values2.length} bars to be equal to ${expected2}`, () => {
+    expect(volumeWeightedAveragePrice(values2).toFixed(2)).to.eq(expected2.toString());
   });
 });
 
