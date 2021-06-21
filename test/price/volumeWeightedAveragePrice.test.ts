@@ -1,8 +1,6 @@
 import {expect} from 'chai';
 
-import type {BarPrice} from '../../src/price/types';
-import {volumeWeightedAveragePrice} from '../../src/price';
-import {volumeWeightedAveragePriceWithBars} from '../../src/price/volumeWeightedAveragePrice';
+import {BarPrice, volumeWeightedAveragePrice, volumeWeightedAveragePriceWithBars} from '../../src/price';
 
 describe('volumeWeightedAveragePrice()', () => {
   const dataToTest: [[BarPrice, number][], number][] = [
